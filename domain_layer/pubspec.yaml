@@ -1,0 +1,19 @@
+name: domain_layer
+description: "A domain layer for the application"
+version: 0.0.1
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.3.2 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  freezed_annotation: ^2.2.0
+
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+  test: ^1.25.0
+  mockito: ^5.4.4
+  build_runner: ^2.3.3
+  freezed: ^2.3.2
