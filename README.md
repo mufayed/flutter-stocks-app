@@ -4,8 +4,7 @@ This repository contains a Flutter app. It displays a list of stocks in real-tim
 
 ## Preview
 
-![Preview](https://test-generating.s3.us-east-1.amazonaws.com/rudy/stocks-app-prev.gif)
-
+[Watch the Preview](https://drive.google.com/file/d/1VwJ7D-u9kdgrD6Ru3yjGyi3jVMqZp61M/view?usp=sharing)
 
 ## Project Structure
 
@@ -31,16 +30,16 @@ With this structure, testing and maintaining individual parts becomes straightfo
 
 ### Installation and How to Run
 
-1. **Clone the repository:**
+1. **Clone the repositoryt:**
 
     ```bash
-    git clone 'url'
+    git clone https://github.com/mufayed/flutter-stocks-app.git
     ```
 
 2. **Install dependencies:**
 
     ```bash
-    cd [project_directory]
+    cd flutter-stocks-app
     flutter pub get
     ```
 3. **Create a Finnhub.io API token:**
@@ -60,3 +59,19 @@ With this structure, testing and maintaining individual parts becomes straightfo
     ```bash
     flutter run --dart-define=apiToken=[Your finnhub.io API token]
     ```
+
+
+## Important Notes
+
+- **Background Task Handling**:  
+  The app doesn’t manage background tasks effectively right now. When the app goes to the background, the socket connection remains open, which should ideally be paused. When the app returns to the foreground, the socket connection should resume to ensure stock prices are updated in real-time.
+
+- **Connection Issues**:  
+  If the socket connection disconnects after a certain period, the app does not automatically reconnect. This issue should be addressed to make sure the stock data is refreshed continuously without manual intervention.
+
+- **Localization Support**:  
+  All text strings currently displayed in the app should be moved to a single `.arb` file. This would make it easier to implement support for multiple languages in the future and improve overall app maintenance.
+
+> These areas need improvement, but due to time constraints, they have not yet been fully implemented.
+
+
