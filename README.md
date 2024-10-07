@@ -6,6 +6,10 @@ This repository contains a Flutter app. It displays a list of stocks in real-tim
 
 [Watch the Preview](https://drive.google.com/file/d/1VwJ7D-u9kdgrD6Ru3yjGyi3jVMqZp61M/view?usp=sharing)
 
+## Architecture Design Document
+
+For a detailed explanation of the design decisions, Please refer to the [Architecture Design Document](https://drive.google.com/file/d/1T0B4RApH-NVkK5Mlsmc8D0RuN_ixaxIi/view?usp=sharing).
+
 ## Project Structure
 
 The project is divided into multiple packages to maintain clean code and scalability:
