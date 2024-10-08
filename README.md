@@ -1,40 +1,46 @@
-# Flutter stocks app
+# 📈 Flutter Stocks App
 
-This repository contains a Flutter app. It displays a list of stocks in real-time, pulling live data from Finnhub APIs, including real-time price updates and search functionality. The design is inspired by Apple's Stocks app.
+Welcome to the **Flutter Stocks App**! This app brings you real-time stock updates, pulling live data from **Finnhub APIs**, with real-time price updates and a smooth search feature. The design takes inspiration from **Apple's Stocks app**.
 
-## Preview
+## 🎥 Preview
 
-[Watch the Preview](https://drive.google.com/file/d/1VwJ7D-u9kdgrD6Ru3yjGyi3jVMqZp61M/view?usp=sharing)
+[👀 Watch the Preview](https://drive.google.com/file/d/1VwJ7D-u9kdgrD6Ru3yjGyi3jVMqZp61M/view?usp=sharing)
 
-## Architecture Design Document
+## 🚀 Experience the App!
 
-For a detailed explanation of the design decisions, Please refer to the [Architecture Design Document](https://drive.google.com/file/d/1T0B4RApH-NVkK5Mlsmc8D0RuN_ixaxIi/view?usp=sharing).
+Exciting news! The app has been pushed to iOS **TestFlight**, and you can now experience it directly on your iPhone. 📱
 
-## Project Structure
+[Join the TestFlight](https://testflight.apple.com/join/hs89kU7P)
 
-The project is divided into multiple packages to maintain clean code and scalability:
+## 📄 Architecture Design Document
 
-- `data_layer/`: Handles all the data communication logics, including repositories implementation and data sources
-- `domain_layer/`: Handles the business logics, including entities, use cases and repositories abstract classes
-- `lib/`: The main application code (Presentation layer)
-    - `config/`: Contains environment settings and DI configs
-    - `core/`: Includes core utilities and the presentation layer
-        - `presentation/`: Contains the UI widgets and the state management, including screens and Cubits/blocs
-        - `util/`: Contains Helper functions and utilities
+Want to dive deeper into the technical details? Check out the [Architecture Design Document](https://drive.google.com/file/d/1T0B4RApH-NVkK5Mlsmc8D0RuN_ixaxIi/view?usp=sharing) for insights into the design choices made for this project.
 
-With this structure, testing and maintaining individual parts becomes straightforward, and the data_layer and domain_layer can be reused in other apps with little effort
+## 🛠 Project Structure
 
-## Getting Started
+The project is structured for **clean code** and **scalability**:
 
-### Pre-setup Steps
+- `data_layer/`: Handles all the data communication logic, including repository implementations and data sources.
+- `domain_layer/`: Manages business logic, including entities, use cases, and repository abstract classes.
+- `lib/`: The main application code (Presentation layer).
+    - `config/`: Environment settings and dependency injection configs.
+    - `core/`: Core utilities and the presentation layer.
+        - `presentation/`: UI widgets and state management (screens, Cubits/blocs).
+        - `util/`: Helper functions and utilities.
 
-- Flutter SDK: [Install Flutter](https://flutter.dev/docs/get-started/install)
-- Dart SDK: Included with Flutter installation.
+This modular structure ensures easy testing, maintainability, and reusability of the `data_layer` and `domain_layer` in other apps with minimal changes.
+
+## 🚀 Getting Started
+
+### ⚙️ Pre-setup Steps
+
+- **Flutter SDK**: [Install Flutter](https://flutter.dev/docs/get-started/install)
+- **Dart SDK**: Included with Flutter.
 - A code editor like [VS Code](https://code.visualstudio.com/) or [Android Studio](https://developer.android.com/studio).
 
-### Installation and How to Run
+### 📦 Installation and Running the App
 
-1. **Clone the repositoryt:**
+1. **Clone the repository:**
 
     ```bash
     git clone https://github.com/mufayed/flutter-stocks-app.git
@@ -46,36 +52,33 @@ With this structure, testing and maintaining individual parts becomes straightfo
     cd flutter-stocks-app
     flutter pub get
     ```
+
 3. **Create a Finnhub.io API token:**
 
-    - Go to [Finnhub.io](https://finnhub.io/) and create an account
-    - Get your API token from the dashboard
-    - Add the token to the app as a Dart environment variable "apiToken" in the `flutter run` command
+    - Visit [Finnhub.io](https://finnhub.io/) and sign up.
+    - Get your API token and add it to the app as an environment variable: `apiToken`.
 
 4. **Run all tests across the project:**
 
     ```bash
     flutter test
     ```
-   
+
 5. **Run the application:**
 
     ```bash
     flutter run --dart-define=apiToken=[Your finnhub.io API token]
     ```
 
-
-## Important Notes
+## ⚠️ Important Notes
 
 - **Background Task Handling**:  
-  The app doesn’t manage background tasks effectively right now. When the app goes to the background, the socket connection remains open, which should ideally be paused. When the app returns to the foreground, the socket connection should resume to ensure stock prices are updated in real-time.
+  The app currently does not manage background tasks efficiently. When the app goes to the background, the socket connection remains open and should be paused. Upon returning to the foreground, the socket should resume to ensure real-time updates.
 
 - **Connection Issues**:  
-  If the socket connection disconnects after a certain period, the app does not automatically reconnect. This issue should be addressed to make sure the stock data is refreshed continuously without manual intervention.
+  If the socket connection drops after some time, the app does not automatically reconnect. This needs fixing to keep the stock data updated without manual refresh.
 
-- **Localization Support**:  
-  All text strings currently displayed in the app should be moved to a single `.arb` file. This would make it easier to implement support for multiple languages in the future and improve overall app maintenance.
+- **Localization**:  
+  All text strings should be moved to a single `.arb` file for easy localization and support for multiple languages in the future.
 
-> These areas need improvement, but due to time constraints, they have not yet been fully implemented.
-
-
+> These improvements could not be fully implemented due to time constraints.
