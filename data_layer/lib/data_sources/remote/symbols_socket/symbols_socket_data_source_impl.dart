@@ -36,6 +36,7 @@ class SymbolsSocketDataSourceImpl implements SymbolsSocketDataSource {
 
         // Check if the data is a trade and parse it
         if (jsonData['type'] == 'trade' && jsonData['data'] != null) {
+          // dynamic is a json object
           final List<dynamic> trades = jsonData['data'];
 
           for (final tradeData in trades) {
@@ -114,5 +115,17 @@ class SymbolsSocketDataSourceImpl implements SymbolsSocketDataSource {
     _channel = null;
     _isConnected = false;
     log('WebSocket connection closed');
+  }
+
+
+  int _reconnectAttempts = 0;
+  Future<void> _reconnect() async {
+    if (_reconnectAttempts < 5) {
+      await Future.delayed(Duration(seconds: 2 * _reconnectAttempts));
+      _reconnectAttempts++;
+      await _initializeConnection();
+    } else {
+      log('Max reconnection attempts reached');
+    }
   }
 }

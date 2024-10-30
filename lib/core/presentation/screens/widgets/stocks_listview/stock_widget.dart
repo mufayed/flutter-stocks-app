@@ -16,16 +16,16 @@ class StockWidget extends StatefulWidget {
 }
 
 class _StockWidgetState extends State<StockWidget> {
-  double _price = 0.0;
-  StockChangeStatus _changeStatus = StockChangeStatus.none;
+  final ValueNotifier<double> _price = ValueNotifier(0.0);
+  final ValueNotifier<StockChangeStatus> _changeStatus =
+      ValueNotifier(StockChangeStatus.none);
   late StockSubscriptionCubit _stockSubscriptionCubit;
 
   @override
   void initState() {
+    super.initState();
     _stockSubscriptionCubit = context.read<StockSubscriptionCubit>();
     _stockSubscriptionCubit.subscribeToSymbol(symbol: widget.symbol.symbol);
-
-    super.initState();
   }
 
   @override
@@ -67,19 +67,26 @@ class _StockWidgetState extends State<StockWidget> {
               if (state is StockSubscriptionLoading)
                 const SmallProgressBar()
               else if (state is StockSubscriptionLoaded)
-                _price != 0
-                    ? Text(
-                        _price.toStringAsFixed(2),
-                        style: TextStyle(
-                            color: _changeStatus == StockChangeStatus.up
-                                ? Colors.green
-                                : _changeStatus == StockChangeStatus.down
-                                    ? Colors.red
-                                    : Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      )
-                    : const SmallProgressBar(),
+                ValueListenableBuilder<double>(
+                  valueListenable: _price,
+                  builder: (context, price, child) {
+                    if (_price.value == 0) {
+                      return const SmallProgressBar();
+                    }
+                    return Text(
+                      price != 0 ? price.toStringAsFixed(2) : '',
+                      style: TextStyle(
+                        color: _changeStatus.value == StockChangeStatus.up
+                            ? Colors.green
+                            : _changeStatus.value == StockChangeStatus.down
+                                ? Colors.red
+                                : Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
+                ),
             ],
           ),
         );
@@ -89,26 +96,21 @@ class _StockWidgetState extends State<StockWidget> {
 
   @override
   void dispose() {
-    // if the stock is not in the stocks that are showing in the main screen then unsubscribe from it
     if (!widget.primaryStock) {
       _stockSubscriptionCubit.unsubscribeFromSymbol(
           symbol: widget.symbol.symbol);
     }
+    _price.dispose();
+    _changeStatus.dispose();
     super.dispose();
   }
 
-  _stockSubscriptionListener(
+  void _stockSubscriptionListener(
       BuildContext context, StockSubscriptionState state) {
-    if (state is StockSubscriptionLoaded) {
-      // if the stock is not the one that we are looking for then return
-      // this to avoid updating the UI with the wrong stock data
-      if (state.stock.symbol != widget.symbol.symbol) {
-        return;
-      }
-      setState(() {
-        _price = state.stock.price;
-        _changeStatus = state.changeStatus;
-      });
+    if (state is StockSubscriptionLoaded &&
+        state.stock.symbol == widget.symbol.symbol) {
+      _price.value = state.stock.price;
+      _changeStatus.value = state.changeStatus;
     }
   }
 }
