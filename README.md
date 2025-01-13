@@ -6,12 +6,6 @@ Welcome to the **Flutter Stocks App**! This app brings you real-time stock updat
 
 [👀 Watch the Preview](https://drive.google.com/file/d/1VwJ7D-u9kdgrD6Ru3yjGyi3jVMqZp61M/view?usp=sharing)
 
-## 🚀 Experience the App!
-
-Exciting news! The app has been pushed to iOS **TestFlight**, and you can now experience it directly on your iPhone. 📱
-
-[Join the TestFlight](https://testflight.apple.com/join/hs89kU7P)
-
 ## 📄 Architecture Design Document
 
 Want to dive deeper into the technical details? Check out the [Architecture Design Document](https://drive.google.com/file/d/1T0B4RApH-NVkK5Mlsmc8D0RuN_ixaxIi/view?usp=sharing) for insights into the design choices made for this project.
